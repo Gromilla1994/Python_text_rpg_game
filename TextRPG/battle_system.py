@@ -7,10 +7,7 @@ action_variants = {
     "попытаться убежать": bcolors.OKGREEN
 }
 
-formating_action_variants = []  
-
-for key in action_variants:
-    formating_action_variants.append(action_variants[key] + key)
+formating_action_variants = hepl_functions.addColorToStrings(action_variants) 
 
 def StartFigth(hero: Hero, enemy: Enemy):
     print(f"{hero.name}, на тебя напал {enemy.name}")
