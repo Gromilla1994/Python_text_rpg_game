@@ -31,6 +31,9 @@ class MeleeWeapon(Item):
         super().__init__(name, description)
         self.attack_power = attack_power 
 
+    def Equip(self, hero):
+        hero.equiped_weapon = self
+
 
 class Shield(Item):
     def __init__(self, name: str, description: str, protection_power):
@@ -60,7 +63,7 @@ class Entity:
         attack_power = bcolors.FAIL + f"attack power - {self.attack_power}"
         
         info_array = [name, health_points, attack_power]
-        print(" : ".join(info_array))
+        print(" : ".join(info_array) + bcolors.ENDC)
 
     def Attack(self, target):
         target.health_points -= self.attack_power 
@@ -70,10 +73,11 @@ class Entity:
 
 
 class Hero(Entity):
-    def __init__(self, name: str, heath_points: int, attack_power: int, class_name: str, inventory=[]):
+    def __init__(self, name: str, heath_points: int, attack_power: int, class_name: str, inventory=[], equiped_weapon=""):
         Entity.__init__(self, name, heath_points, attack_power)
         self.class_name = class_name
         self.inventory = inventory
+        self.equiped_weapon = equiped_weapon
 
     def UseItem(self):
         item_name = input("Какой предмет хочешь использовать?:")
@@ -85,19 +89,34 @@ class Hero(Entity):
     def PrintInfo(self):
         super().PrintInfo()
 
-        names_of_item_in_inventory = ""
-        for item in self.inventory:
-            names_of_item_in_inventory += "\n" + item.name
+    @hepl_functions.pretify_separation
+    def DisplayInventory(self, classes_of_items=[]):
+        names_of_item_in_inventory = []
 
-        print(bcolors.ENDC + "inventory:{0}".format(names_of_item_in_inventory))
+        if classes_of_items != []:
+            for item in self.inventory:
+                if item.__class__.__name__ in classes_of_items:
+                    names_of_item_in_inventory.append(item.name)
+        else:
+            for item in self.inventory:
+                names_of_item_in_inventory.append(item.name)
+
+        print(bcolors.ENDC + ("\n".join(names_of_item_in_inventory)))
 
     def OpenInventory(self):
         action = ""
+        action_variants = [
+            "экипировать предмет",
+            "использовать предмет",
+            "выйти"
+        ]
 
         while action != "выйти":
-            self.PrintInfo()
-            action = hepl_functions.validateAnswer(["экипировать предмет", "использовать предмет", "выйти"], False)
-
+            self.DisplayInventory()
+            action = hepl_functions.validateAnswer(action_variants, False)
+            
+            if action == "экипировать предмет":
+                self.DisplayInventory([MeleeWeapon.__name__, Shield.__name__])
 
 class Enemy(Entity):
     def __init__(self, name: str, heath_points: int, attack_power: int):

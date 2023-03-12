@@ -18,7 +18,7 @@ def StartFigth(hero: Hero, enemy: Enemy):
         print(f"\nТы нанёс врагу {enemy.name} {hero.attack_power} урона!\nЗдоровье врага {enemy.name} = {enemy.health_points if enemy.health_points >= 0 else '0'}!")
     
     elif answer == "открыть инвентарь":
-        hero.PrintInfo()
+        hero.DisplayInventory()
 
     elif answer == "попытаться убежать":
         print(f"Ты убежал от {enemy.name}")

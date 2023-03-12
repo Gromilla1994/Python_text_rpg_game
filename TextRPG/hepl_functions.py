@@ -13,11 +13,8 @@ def validateAnswer(variants_of_answer, variants_are_colored=False) -> str:
 
     while(answer not in variants_of_answer):
         print("\nТы ввёл что-то, что мне непонятно, преключенец.")
-
-        # по логике если is_colored = true, то мы передаем dict, а если false то list, отсюда и такой страшный оператор
-        result_after_condition = formating_action_variants if variants_are_colored else formating_action_variants.keys()
         
-        formating_result = ' : '.join(result_after_condition) + classes.bcolors.ENDC
+        formating_result = ' : '.join(formating_action_variants) + classes.bcolors.ENDC
         print(f"ты можешь:\n{formating_result}\n")
         answer = input("твой выбор:" + "\n").lower()
 
