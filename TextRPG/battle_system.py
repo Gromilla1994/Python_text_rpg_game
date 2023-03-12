@@ -11,7 +11,6 @@ formating_action_variants = hepl_functions.addColorToStrings(action_variants)
 
 def StartFigth(hero: Hero, enemy: Enemy):
     print(f"{hero.name}, на тебя напал {enemy.name}")
-    print("Ты можешь: \n{0}".format(" : ".join(formating_action_variants)) + bcolors.ENDC)
     answer = hepl_functions.validateAnswer(action_variants, True)
 
     if answer == "ударить":

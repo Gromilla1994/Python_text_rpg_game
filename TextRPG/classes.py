@@ -78,7 +78,6 @@ class Hero(Entity):
     def UseItem(self):
         item_name = input("Какой предмет хочешь использовать?:")
         
-
     def AppendItemInInventory(self, item: Item):
         self.inventory.append(item)
 
@@ -91,6 +90,13 @@ class Hero(Entity):
             names_of_item_in_inventory += "\n" + item.name
 
         print(bcolors.ENDC + "inventory:{0}".format(names_of_item_in_inventory))
+
+    def OpenInventory(self):
+        action = ""
+
+        while action != "выйти":
+            self.PrintInfo()
+            action = hepl_functions.validateAnswer(["экипировать предмет", "использовать предмет", "выйти"], False)
 
 
 class Enemy(Entity):

@@ -8,6 +8,7 @@ def validateAnswer(variants_of_answer, variants_are_colored=False) -> str:
     else:
         formating_action_variants = variants_of_answer
 
+    print("Ты можешь: \n{0}".format(" : ".join(formating_action_variants)) + classes.bcolors.ENDC)
     answer = input("\nТвой выбор:\n").lower()
 
     while(answer not in variants_of_answer):
