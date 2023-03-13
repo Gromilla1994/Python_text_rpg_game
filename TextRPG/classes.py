@@ -125,6 +125,8 @@ class Hero(Entity):
                 choosen_weapon = hepl_functions.validateAnswer(weapons, False)
 
                 self.equiped_weapon = self.GetItemByName(choosen_weapon)
+                self.equiped_weapon.name += " - *"
+                
                 print(f"Вы эквипировали {self.equiped_weapon.name}")
 
                 

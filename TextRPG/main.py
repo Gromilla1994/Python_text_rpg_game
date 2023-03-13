@@ -13,4 +13,4 @@ hero = Hero("Zahar", 100, 10, "Warrior", inventory)
 dog = Enemy("Dog", 15, 3)
 Poison("Big health poison", "heal 50 hp", 50)
 
-hero.OpenInventory()
+StartFigth(hero, dog)
