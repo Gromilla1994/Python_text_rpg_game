@@ -102,6 +102,7 @@ class Hero(Entity):
                 names_of_item_in_inventory.append(item.name)
 
         print(bcolors.ENDC + ("\n".join(names_of_item_in_inventory)))
+        return names_of_item_in_inventory
 
     def OpenInventory(self):
         action = ""
@@ -116,7 +117,15 @@ class Hero(Entity):
             action = hepl_functions.validateAnswer(action_variants, False)
             
             if action == "экипировать предмет":
-                self.DisplayInventory([MeleeWeapon.__name__, Shield.__name__])
+                class_of_items_can_equip = [
+                    MeleeWeapon.__name__,
+                    Shield.__name__,
+                ]
+                allow_items = self.DisplayInventory(class_of_items_can_equip)
+                print(allow_items)
+                
+                choosen_item = hepl_functions.validateAnswer(allow_items, False)
+                
 
 class Enemy(Entity):
     def __init__(self, name: str, heath_points: int, attack_power: int):

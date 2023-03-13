@@ -33,7 +33,9 @@ def pretify_separation(func):
     separation = "------------------------------"
     def wrapper(*args):
         print("\n" + separation)
-        func(*args)
+        returned_value = func(*args)
         print(separation + "\n")
+        
+        return returned_value
     
     return wrapper
