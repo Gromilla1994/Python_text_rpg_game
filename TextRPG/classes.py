@@ -117,15 +117,21 @@ class Hero(Entity):
             action = hepl_functions.validateAnswer(action_variants, False)
             
             if action == "экипировать предмет":
-                class_of_items_can_equip = [
+                class_of_weapons_can_equip = [
                     MeleeWeapon.__name__,
                     Shield.__name__,
                 ]
-                allow_items = self.DisplayInventory(class_of_items_can_equip)
-                print(allow_items)
+                weapons = self.DisplayInventory(class_of_weapons_can_equip)
+                choosen_weapon = hepl_functions.validateAnswer(weapons, False)
+
+                self.equiped_weapon = self.GetItemByName(choosen_weapon)
+                print(f"Вы эквипировали {self.equiped_weapon.name}")
+
                 
-                choosen_item = hepl_functions.validateAnswer(allow_items, False)
-                
+    def GetItemByName(self, name_of_item: str):
+        for item in self.inventory:
+            if item.name == name_of_item:
+                return item
 
 class Enemy(Entity):
     def __init__(self, name: str, heath_points: int, attack_power: int):
