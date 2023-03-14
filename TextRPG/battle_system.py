@@ -1,5 +1,6 @@
 from classes import *
 import hepl_functions
+import random
 
 action_variants = {
     "ударить": bcolors.FAIL,
@@ -27,8 +28,18 @@ def StartFigth(hero: Hero, enemy: Enemy):
             hero.OpenInventory()
 
         elif answer == "попытаться убежать":
-            print(f"Ты убежал от {enemy.name}")
-            return  
+            if runFromEnemy(50):
+                print(f"Ты убежал от {enemy.name}")
+                return
+            print("Убежать не удалось!")
+                  
         
         hero.health_points -= enemy.attack_power
         print(f"{enemy.name} нанёс тебе {enemy.attack_power} ед. урона!\n")
+
+def runFromEnemy(success_chance):
+    if success_chance >= random.randint(1, 100):
+        return True
+    
+    return False 
+    

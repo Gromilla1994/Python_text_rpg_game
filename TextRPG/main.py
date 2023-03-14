@@ -1,3 +1,8 @@
+# TODO:
+# - систему убегания от врага, завязанную на рандоме
+# 
+#
+
 from classes import *
 from battle_system import *
 import items
