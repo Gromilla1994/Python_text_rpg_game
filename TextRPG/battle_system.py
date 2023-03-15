@@ -17,12 +17,12 @@ def StartFigth(hero: Hero, enemy: Enemy):
         answer = hepl_functions.validateAnswer(action_variants, True)
 
         if answer == "ударить":
-            hero_weapon = hero.equiped_weapon
+            hero_weapon = hero.equiped_weapon 
             # если на персонаже эквипированно оружие, то атака перса складывается с ней, иначе в счет идёт просто атака персонажа
             attack_power = (hero.attack_power + hero_weapon.attack_power) if hero_weapon != "" else hero.attack_power  
             enemy.health_points -= attack_power
             
-            print(f"\nТы нанёс врагу {enemy.name} {hero.attack_power} урона!\nЗдоровье врага {enemy.name} = {enemy.health_points if enemy.health_points >= 0 else '0'}!")
+            print(f"\nТы нанёс врагу {enemy.name} {attack_power} урона!\nЗдоровье врага {enemy.name} = {enemy.health_points if enemy.health_points >= 0 else '0'}!")
         
         elif answer == "открыть инвентарь":
             hero.OpenInventory()

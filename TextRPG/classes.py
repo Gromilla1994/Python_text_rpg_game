@@ -95,7 +95,7 @@ class Hero(Entity):
 
         if classes_of_items != []:
             for item in self.inventory:
-                if item.__class__.__name__ in classes_of_items:
+                if item.__class__.__name__ in classes_of_items and item.name[-1] != "*":
                     names_of_item_in_inventory.append(item.name)
         else:
             for item in self.inventory:
@@ -123,6 +123,10 @@ class Hero(Entity):
                 ]
                 weapons = self.DisplayInventory(class_of_weapons_can_equip)
                 choosen_weapon = hepl_functions.validateAnswer(weapons, False)
+
+                # убираем звездочку в названии
+                if self.equiped_weapon != "":
+                    self.equiped_weapon.name = self.equiped_weapon.name[:-4]
 
                 self.equiped_weapon = self.GetItemByName(choosen_weapon)
                 self.equiped_weapon.name += " - *"
